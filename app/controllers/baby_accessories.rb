@@ -1,2 +1,0 @@
-class BabyAccessoriesController < ApplicationController
-end
