@@ -1,2 +1,2 @@
-class ClothesItemsController < Application Controller 
+class ClothingItemsController < ApplicationController 
 end
