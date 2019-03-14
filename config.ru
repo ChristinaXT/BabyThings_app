@@ -5,7 +5,6 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 use Rack::MethodOverride
-use BabyClothesController 
-use BabyAccessoriesController  
-use UsersController   
+use ClothingItemsController
+use UsersController
 run ApplicationController
