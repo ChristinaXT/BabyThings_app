@@ -60,7 +60,7 @@ class ClothingItemsController < ApplicationController
          # delete
       delete '/clothing_items/:id' do
         if logged_in?
-          @clothing_item = Tweet.find(params[:id])
+          @clothing_item = Clothing_item.find(params[:id])
         if @clothing_item.user == current_user
            @clothing_item.delete
         else
