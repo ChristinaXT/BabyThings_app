@@ -1,0 +1,8 @@
+<h2>Welcome, Lists for Baby clothing Needs!</h2>
+
+<ul>
+	<% @clothing_items.each do |clothing_item| %>
+		<li><%= clothing_item.content %></li>
+	<% end %>
+</ul>
+<p><a href="/logout">Log Out</a></p>
