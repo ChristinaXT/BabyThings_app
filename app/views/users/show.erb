@@ -1,0 +1,7 @@
+<h1>Your Baby Clothing Items List:</h1>
+
+<ul>
+	<% @user.clothing_items.each do |clothing_item| %>
+		<li><%= clothing_item.content %></li>
+	<% end %>
+</ul>
