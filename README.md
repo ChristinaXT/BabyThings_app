@@ -17,4 +17,4 @@ MIT License
 
 <h4>Contributions</h4>
 
-Thank you to Flatiron School for allowing me to be a part of their program and create one of my first web applications.
+Thank you to Flatiron School 
