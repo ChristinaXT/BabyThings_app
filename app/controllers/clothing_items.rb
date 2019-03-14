@@ -2,7 +2,7 @@ class ClothingItemsController < ApplicationController
 
   get '/clothing_items' do
       if logged_in?
-        @clothing_items = clothing_item.all
+        @clothing_items = clothing_items.all
         erb :'clothing_items/items'
       else
         redirect "/login"
