@@ -5,19 +5,19 @@
  </head>
  <div class ="main login-top">
 
+  <body>
 
+  <h2>Add New Baby Items</h2>
+  <h3>Items can include clothing, accessories and furniture, or anything else you may need</h3>
 
-<h2>Here, you can add all the baby clothing and accessory items you need</h2>
-<h3>Feel free to brain-storm and edit all you want</h3>
-
-<form class="" action="/things" method="post">
-
+  <form method="POST" action="/things">
     <h3> Baby Clothing: </h3> <input type="string"  name="name"><br><br>
     <h3> Baby Accessory: </h3> <input type="string"  name="name"><br><br>
 
     <input type="submit" id="submit">
 
   </form>
+  <a href="/users/<%= @user.id %>"><button>Your List</button></a></p>
   <p><a href="/logout"><button>Log Out</button></a></p>
 
  </body>
