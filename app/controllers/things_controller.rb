@@ -1,16 +1,10 @@
 class ThingsController < ApplicationController
 
-  get '/things' do
-      if logged_in?
-        @things = Thing.all
-        erb :'things/things'
-      else
-        redirect "/login"
-      end
-    end
+ 
 
     get '/things/new' do
         if logged_in?
+          @user = current_user
           erb :'things/new'
         else
           redirect "/login"
@@ -18,50 +12,62 @@ class ThingsController < ApplicationController
     end
 
     post '/things' do
-      	if logged_in? && params[:content] != ""
-        	@thing = current_user.things.build(content: params[:content])
+       @user = current_user
+      	if logged_in? && params[:name] != ""
+        	@thing = current_user.things.build(name: params[:name])
         	@thing.save
     			redirect "/things/#{@thing.id}"
-    		elsif logged_in? && params[:content] == ""
+    		elsif logged_in? && params[:name] == ""
        		redirect '/things/new'
     		else
        		redirect '/login'
      		end
     	end
 
+     get '/things' do
+      if logged_in?
+        @user = current_user
+        @things = Thing.all
+        erb :'things/things'
+      else
+        redirect "/login"
+      end
+    end
+
       get '/things/:id' do
         	if logged_in?
          		@thing = Thing.find(params[:id])
+         		@user = User.find(@thing.user_id)
       			erb :'/things/show'
          	else
           	redirect '/login'
         	end
        	end
 
-      get '/things/:id/edit' do
-  	     if logged_in?
+      post '/things/:id/edit' do
     	      @thing = Thing.find(params[:id])
-    	       erb :"/things/edit"
+    	      if logged_in? && @thing.user_id == current_user.id 
+    	       erb :'/things/edit'
    	     else
              redirect '/login'
   	     end
  	     end
 
-       patch '/things/:id' do
+       post '/things/:id' do
     	    @thing = Thing.find(params[:id])
-  		     if logged_in? && params[:content] != ""
-      	      @thing.update(content: params[:content])
+  		     if logged_in? && params[:name] != ""
+      	      @thing.update(content: params[:name])
       	       redirect "/things/#{@thing.id}"
-  		     else logged_in? && params[:content] == ""
+  		     else logged_in? && params[:name] == ""
       	       redirect "/things/#{@thing.id}/edit"
      	     end
    	     end
 
          # delete
-      delete '/things/:id' do
-        if logged_in?
+      post '/things/:id/delete' do
           @thing = Thing.find(params[:id])
-        if @thing.user == current_user
+          @user = current_user
+          if logged_in? && @thing.user_id == @user.id
            @thing.delete
         else
           redirect '/things'
