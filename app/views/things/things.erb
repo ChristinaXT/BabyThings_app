@@ -1,0 +1,8 @@
+<h2>Welcome, Lists for Baby clothing and Accessory Needs!</h2>
+
+<ul>
+	<% @things.each do |thing| %>
+		<li><%= thing.content %></li>
+	<% end %>
+</ul>
+<p><a href="/logout">Log Out</a></p>

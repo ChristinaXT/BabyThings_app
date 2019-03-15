@@ -1,0 +1,7 @@
+<h1>Edit Your Baby Clothing and Accessory Items:</h1>
+<%= @thing.content %>
+
+<form method="POST" action="/things/<%= @thing.id %>">
+	<input id="hidden" type="hidden" name="_method" value="delete">
+	<input type="submit" value="Delete Thing">
+</form>

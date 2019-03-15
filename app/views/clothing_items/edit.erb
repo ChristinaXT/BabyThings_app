@@ -1,6 +1,0 @@
-<h2>Edit Your Baby Clothing Items Here!</h2>
-<form method="post" action="/clothing_items/<%=@clothing_item.id%>">
-  <input id="hidden" type="hidden" name="_method" value="PATCH">
-  <input type="text" name="content" value="<%= @clothing_item.content %>">
-  <input type="submit" value="submit">
-</form>
