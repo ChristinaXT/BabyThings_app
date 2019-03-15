@@ -1,7 +1,14 @@
 <h1>Your Baby Clothing and Accessory Items List:</h1>
 
+<div class ="main tab_box">
+
 <ul>
-	<% @user.things.each do |thing| %>
-		<li><%= thing.content %></li>
+	<% @user.things.each do |thing
+	 <a href="/things/<%= thing.id %>">
+		<li><%= thing.content %></li></a>
 	<% end %>
 </ul>
+
+<p><a href="/things/new"><button>Add New Baby Item</button></a></p>
+
+<h2><a href="/things"><button>List of Baby Things You Need</button></a></h2>
