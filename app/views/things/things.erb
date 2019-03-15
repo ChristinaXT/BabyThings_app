@@ -3,21 +3,22 @@
  <head>
   <meta charset="UTF-8">
  </head>
+<body>
+  <h2>List of Baby Clothing and Accessory Needs!</h2>
+  <div class ="main tab_box">
+  <ul>
+    <ul>
+    	<% @things.each do |thing| %>
+	     <a href="/things/<%= thing.id %>">
+       <%= thing.name %> </a><br>
+       <% end %>
+     </ul>
+   </ul>
 
- <body>
+  <p><a href="/things/new"> <button>Add New Baby Item</button></a></p>
+  <p><a href="/users/<%= @user.id %>"><button>Your List</button></a></p>
+  <p><a href="/logout">Log Out</button></a></p>
 
-<h2>Welcome, Lists for Baby clothing and Accessory Needs!</h2>
-<div class ="main tab_box">
-<ul>
-	<% @things.each do |thing| %>
-	<a href="/things/<%= thing.id %>">
-		<li><%= thing.content %></li>
-	<% end %>
-</ul>
-
-<p><a href="/things/new"> <button>Add New Baby Item</button></a></p>
-<p><a href="/logout">Log Out</a></p>
-
-</body>
+ </body>
  </div>
 </html>
