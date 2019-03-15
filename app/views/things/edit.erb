@@ -1,5 +1,5 @@
 <h2>Edit Your Baby Clothing and Accessory Items Here!</h2>
-<form method="post" action="/things/<%=@thing.id%>">
+<form method="post" action="/things/<%= @thing.id %>">
   <input id="hidden" type="hidden" name="_method" value="PATCH">
   <input type="text" name="content" value="<%= @thing.content %>">
   <input type="submit" value="submit">
