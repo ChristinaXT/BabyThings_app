@@ -1,6 +1,14 @@
 class ThingsController < ApplicationController
 
- 
+   get '/things' do
+      if logged_in?
+        @user = current_user
+        @things = Thing.all
+        erb :'things/things'
+      else
+        redirect "/login"
+      end
+    end
 
     get '/things/new' do
         if logged_in?
@@ -24,15 +32,7 @@ class ThingsController < ApplicationController
      		end
     	end
 
-     get '/things' do
-      if logged_in?
-        @user = current_user
-        @things = Thing.all
-        erb :'things/things'
-      else
-        redirect "/login"
-      end
-    end
+    
 
       get '/things/:id' do
         	if logged_in?
