@@ -21,14 +21,12 @@ class ThingsController < ApplicationController
 
     post '/things' do
        @user = current_user
-      	if logged_in? && params[:name] != ""
-        	@thing = current_user.things.build(name: params[:name])
+      	if logged_in? && params[:content] == ""
+      	  redirect '/things/new'
+      	else
+        	@thing = Thing.create(content: params[:content])
         	@thing.save
     			redirect "/things/#{@thing.id}"
-    		elsif logged_in? && params[:name] == ""
-       		redirect '/things/new'
-    		else
-       		redirect '/login'
      		end
     	end
 
@@ -55,11 +53,12 @@ class ThingsController < ApplicationController
 
        post '/things/:id' do
     	    @thing = Thing.find(params[:id])
-  		     if logged_in? && params[:name] != ""
-      	      @thing.update(content: params[:name])
+  		     if params[:content] == ""
+  		       redirect "/things/#{@thing.id}/edit"
+  		     else
+      	      @thing.update(content: params[:content])
       	       redirect "/things/#{@thing.id}"
-  		     else logged_in? && params[:name] == ""
-      	       redirect "/things/#{@thing.id}/edit"
+      	       
      	     end
    	     end
 
@@ -69,9 +68,7 @@ class ThingsController < ApplicationController
           @user = current_user
           if logged_in? && @thing.user_id == @user.id
            @thing.delete
-        else
           redirect '/things'
-        end
         else
           redirect '/login'
         end
