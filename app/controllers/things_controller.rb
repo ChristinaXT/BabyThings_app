@@ -59,17 +59,16 @@ class ThingsController < ApplicationController
    	  end
 
          # delete
-       delete '/things/:id' 
+       delete '/things/:id' do 
        if logged_in? 
   		   @thing = Thing.find(params[:id])
-  		  if @thing.user == current_user
-  			@thing.delete
-  		else 
-  			redirect '/things'
-  		end 
+  		   if @thing.user == current_user
+  			   @thing.delete
+  	   	 else 
+  			   redirect '/things'
+  		   end 
   	  else
   		  redirect '/login'
   	end
   end
-
 end
