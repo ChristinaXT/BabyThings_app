@@ -4,13 +4,13 @@
 
 <ul>
 	<% @user.things.each do |thing| %>
-	 <a href="/things/<%= thing.id %>">
-		<%= thing.name %> </a><br>
+	 
+		<%= thing.content %> <br>
 	<% end %>
 </ul>
 
 <p><a href="/things/new"><button>Add New Baby Item</button></a></p>
 
-<h2><a href="/things"><button>List of Baby Things You Need</button></a></h2>
+
 <p><a href="/logout"><button>Log Out</button></a></p>
 </div>
