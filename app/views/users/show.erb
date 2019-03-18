@@ -3,7 +3,7 @@
 <div class ="main tab_box">
 
 <ul>
-	<% @user.things.each do |thing
+	<% @user.things.each do |thing| %>
 	 <a href="/things/<%= thing.id %>">
 		<%= thing.name %> </a><br>
 	<% end %>
