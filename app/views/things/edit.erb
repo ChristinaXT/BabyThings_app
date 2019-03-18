@@ -6,11 +6,10 @@
   
   <input id="hidden" type="hidden" name="_method" value="PATCH">
   
-  <h3> Baby Clothing: </h3> <input type="string" value="<%=@thing.name%>" name="name"><br><br>
-  <h3> Baby Accessory: </h3> <input type="string" value="<%=@thing.name%>" name="name"><br><br>
+  <h3> Baby Clothing: </h3> <input type="string" value="<%=@thing.name%>" name="content"><br><br>
+  <h3> Baby Accessory: </h3> <input type="string" value="<%=@thing.name%>" name="content"><br><br>
 
-  
-  
+  <input type="text" name="content" value="<%= @thing.content %>">  
   <input type="submit" value="update">
 </form>
 </div>
