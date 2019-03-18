@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   
   post '/signup' do
     if params.values.any? {|value| value == ""}
-      erb :'users/create_users', locals: {message: "Please try again"}
+      erb :'users/create_user', locals: {message: "Please try again"}
     else
       @user = User.new(username: params[:username], email: params[:email], password: params[:password])
       @user.save
