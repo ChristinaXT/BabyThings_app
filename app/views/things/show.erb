@@ -4,15 +4,13 @@
  <body>
 
 <h1>Edit Your Baby Clothing and Accessory Items: <%= @thing[:name] %></h1>
-<h1> User: <%= @user.username %> </h1>
+
 <br>
    
 <form method="POST" action="/things/<%= @thing.id %>">
 	<input id="hidden" type="hidden" name="_method" value="delete">
 	<input type="submit" value="Delete Item">
 </form>
-
-<p><a href="/users/<%= @things.user_id %>"><button>Your List</button></a></p>
 
 
    <p><a href="/logout"><button>Log Out</button></a></p>
