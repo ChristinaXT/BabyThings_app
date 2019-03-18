@@ -2,6 +2,7 @@ class ThingsController < ApplicationController
 
    get '/things' do
       if logged_in?
+        @user = current_user
         @things = Thing.all
         erb :'things/things'
       else
@@ -9,15 +10,19 @@ class ThingsController < ApplicationController
       end
     end
 
-    get '/things/new' do
-        if logged_in?
+   
+   get '/things/new' do
+     if logged_in?
+          @user = current_user
           erb :'things/new'
         else
           redirect "/login"
         end
     end
-
+   
     post '/things' do
+      	 @user = current_user
+      	
       	if logged_in? && params[:content] != ""
       	  @thing = current_user.things.build(content: params[:content])
     	@thing.save
@@ -29,7 +34,8 @@ class ThingsController < ApplicationController
  		end
 	end
     
-
+   
+   
       get '/things/:id' do
         	if logged_in?
          		@thing = Thing.find(params[:id])
@@ -39,9 +45,9 @@ class ThingsController < ApplicationController
         	end
      end
 
-      get '/things/:id/edit' do
-    	   if logged_in?   
-           @thing = Thing.find(params[:id])
+      post '/things/:id/edit' do
+    	     @thing = Thing.find(params[:id])
+    	     if logged_in? && @thing.user_id == current_user.id
     	       erb :'/things/edit'
    	   else
             redirect '/login'
@@ -59,15 +65,13 @@ class ThingsController < ApplicationController
    	  end
 
          # delete
-       delete '/things/:id' do 
-       if logged_in? 
+       post '/things/:id/delete' do
   		   @thing = Thing.find(params[:id])
-  		   if @thing.user == current_user
+  		   @user = current_user
+  		   if logged_in? && @thing.user_id == @user.id
   			   @thing.delete
-  	   	 else 
-  			   redirect '/things'
-  		   end 
-  	  else
+  	   	 erb :'/things/delete'
+  	     else
   		  redirect '/login'
   	end
   end
