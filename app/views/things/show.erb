@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <html>
- <head>
-  <meta charset="UTF-8">
- </head>
+ 
  <body>
 
 <h1>Edit Your Baby Clothing and Accessory Items: <%= @thing[:name] %></h1>
 <h1> User: <%= @user.username %> </h1>
 <br>
-
-<form method="post" action="/things/<%= @thing.id %>/edit">
-   <input id="hidden" type="hidden" name="_method" value="edit">
-   <input type="submit" value="Edit This Item">
-   </form>
    
 <form method="POST" action="/things/<%= @thing.id %>">
 	<input id="hidden" type="hidden" name="_method" value="delete">
