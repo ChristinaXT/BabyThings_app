@@ -1,12 +1,14 @@
-<div class ="main login-top">
+<section class="intro-section">
+  <div class="container">
 <h3>Edit Your Baby Clothing and Accessory Items Here!</h3>
 
 
-<form method="post" action="/things/<%= @thing.id %>">
+<form action="/things/<%= @thing.id %>" method="POST">
   
   <input id="hidden" type="hidden" name="_method" value="PATCH">
 
-  <input type="text" name="content" value="<%= @thing.content %>">  
-  <input type="submit" value="update">
+  <input type="text" class="form-control" name="content" value="<%= @thing.content %>">  
+  <input type="submit" class="btn btn-primary" value="submit" id="submit">
 </form>
 </div>
+</section>
