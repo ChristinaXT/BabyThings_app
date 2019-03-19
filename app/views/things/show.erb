@@ -1,19 +1,24 @@
-<!DOCTYPE html>
-<html>
- 
- <body>
+<section class="intro-section">
+  <div class="container">
 
 <h3>Edit Your Baby Clothing and Accessory Items: <%= @thing[:name] %></h3>
 
 <br>
    
-<form method="POST" action="/things/<%= @thing.id %>">
+<form action="/things/<%= @thing.id %>/things/<%= thing.id %>/delete" method="POST">
 	<input id="hidden" type="hidden" name="_method" value="delete">
-	<input type="submit" value="Delete Item">
+	<input type="submit" class="btn btn-danger" value="Delete Item">
 </form>
 
+<button class="btn btn-default"><a href="/things/<%= @thing.id %>/things/new">Add A New Baby Item</a></button>
+<button class="btn btn-default"><a href="/things/<%= @thing.id %>/edit">Edit Baby Item</a></button>
 
    <p><a href="/logout"><button>Log Out</button></a></p>
+	  
+<form action="/things/<%=@thing.id %>/delete" method="post">
+  <input type="hidden" id="hidden" name="_method" value="delete">
+  <input type="submit" class="btn btn-danger" value="delete item">
 
- </body>
-</html>
+ </form>
+</div>
+</section>
