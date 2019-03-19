@@ -1,22 +1,15 @@
-<!DOCTYPE html>
-<html>
-
-<body>
-  <h2>List of Baby Clothing and Accessory Needs!</h2>
-  <div class ="main tab_box">
-  <ul>
-    <ul>
-    	<% @things.each do |thing| %>
+<section class="intro-section">
+  <div class="container">
+  <h2>List of Baby Clothing and Accessory Needs</h2>
+      <% @things.each do |thing| %>
 	     <a href="/things/<%= thing.id %>">
        <%= thing.content %> </a><br>
        <% end %>
-     </ul>
-   </ul>
-
-  <p><a href="/things/new"> <button>Add New Baby Item</button></a></p>
- 
+   
+	  
+  <button class="btn btn-default"><a href="/things/new">Add New Baby Item</a></button>  
+	 
   <p><a href="/logout">Log Out</button></a></p>
 
- </body>
  </div>
-</html>
+</section>
