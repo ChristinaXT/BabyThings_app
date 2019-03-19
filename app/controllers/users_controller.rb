@@ -1,10 +1,6 @@
 class UsersController < ApplicationController
 
-  get '/users/:slug' do
-    @user = User.find_by_slug(params[:slug])
-    erb :'users/show'
-  end 
-  
+
   get '/signup' do
     if !logged_in?
 	erb :'users/create_user'
@@ -35,10 +31,10 @@ class UsersController < ApplicationController
   post '/login' do
     @user = User.find_by(:username => params[:username])
       if @user && @user.authenticate(params[:password])
-	session[:user_id] = user.id 
-	redirect '/things'
+	  session[:user_id] = user.id 
+	     redirect '/things'
       else
-	erb :'users/login', locals: {message: "Please try again"}
+	     erb :'users/login', locals: {message: "Please try again"}
     end
   end
 

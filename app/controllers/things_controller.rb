@@ -9,7 +9,6 @@ class ThingsController < ApplicationController
       end
     end
 
-   
    get '/things/new' do
      if logged_in?
         erb :'things/new'
@@ -20,11 +19,11 @@ class ThingsController < ApplicationController
    
     post '/things' do
        if params.values.any? {|value| value == ""}
-         erb :'projects/new', locals: {message: "Please try again"}
+         erb :'things/new', locals: {message: "Please try again"}
        else   
-	  user = User.find(session[:user_id])
+	       user = User.find(session[:user_id])
       	  @thing = Thing.create(content: params[:content] user_id: user.id)
-    	  redirect "/things/#{@thing.id}"
+    	    redirect "/things/#{@thing.id}"
        end
     end
     
@@ -38,11 +37,11 @@ class ThingsController < ApplicationController
      end
 
       get '/things/:id/edit' do
-	 if logged_in?
-    	   @thing = Thing.find(params[:id])
-    	   if @thing.user_id == session[:user_id]
+	       if logged_in?
+    	    @thing = Thing.find(params[:id])
+    	     if @thing.user_id == session[:user_id]
     	      erb :'/things/edit'
-   	   else
+   	     else
               erb :'things', locals: {message: "You don't have access to edit list"}
            end
          else
@@ -52,8 +51,8 @@ class ThingsController < ApplicationController
 
        patch '/things/:id' do
     	  if params.values.any? {|value| value == ""}
-	     redirect to "/things/#{params[:id]}/edit"
-	  else
+	        redirect to "/things/#{params[:id]}/edit"
+	      else
             @thing = Thing.find(params[:id])
       	    @thing.content = params[:content]
             @thing.save
@@ -64,9 +63,9 @@ class ThingsController < ApplicationController
       # delete
        delete '/things/:id/delete' do
          @thing = Thing.find(params[:id])
-  	if session[:user_id]
-          @thing = Thing.find(params[:id])
-           if @thing.user_id == session[:user_id]
+        	if session[:user_id]
+           @thing = Thing.find(params[:id])
+            if @thing.user_id == session[:user_id]
               @thing.delete
               redirect to '/things'
            else
