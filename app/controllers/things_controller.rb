@@ -1,3 +1,4 @@
+require 'pry'
 class ThingsController < ApplicationController
 
    get '/things' do
@@ -22,7 +23,8 @@ class ThingsController < ApplicationController
          erb :'things/new', locals: {message: "Please try again"}
        else   
 	       user = User.find(session[:user_id])
-      	  @thing = Thing.create(content: params[:content] user_id: user.id)
+      	  @thing = Thing.create(content: params[:content])
+      	  @thing = Thing.create(user_id: params[:user_id])
     	    redirect "/things/#{@thing.id}"
        end
     end
