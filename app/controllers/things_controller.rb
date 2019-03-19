@@ -44,7 +44,7 @@ class ThingsController < ApplicationController
     	     if @thing.user_id == session[:user_id]
     	      erb :'/things/edit'
    	     else
-              erb :'things', locals: {message: "You don't have access to edit list"}
+              erb :'things/things', locals: {message: "You don't have access to edit list"}
            end
          else
              erb :'users/login', locals: {message: "Please login"}
