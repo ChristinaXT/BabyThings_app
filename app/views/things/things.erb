@@ -2,12 +2,12 @@
   <div class="container">
   <h2>List of Baby Clothing and Accessory Needs</h2>
       <% @things.each do |thing| %>
-	     <a href="/things/<%= thing.id %>">
+	     <a href="/things/<%= @thing.id %>">
        <%= thing.content %> </a><br>
        <% end %>
    
 	  
-  <button class="btn btn-default"><a href="/things/new">Add New Baby Item</a></button>  
+  <button> <a href="/things/new">Add New Baby Item</a></button>  
 	 
   <p><a href="/logout">Log Out</button></a></p>
 
