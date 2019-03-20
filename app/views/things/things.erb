@@ -2,7 +2,7 @@
   <div class="container">
   <h2>List of Baby Clothing and Accessory Needs</h2>
       <% @things.each do |thing| %>
-	     <a href="/things/<%= @thing.id %>">
+	     <a href="/things/<%= thing.id %>">
        <%= thing.content %> </a><br>
        <% end %>
    
