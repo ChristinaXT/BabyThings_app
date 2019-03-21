@@ -19,7 +19,7 @@ class ThingsController < ApplicationController
    end
    
     post '/things' do
-       if params.values.any? {|value| value == "}
+       if params.values.any? {|value| value == ''}
          erb :'things/new', locals: {message: 'Please try again'}
        else   
 	       user = User.find(session[:user_id])
@@ -65,7 +65,7 @@ class ThingsController < ApplicationController
       # delete
        delete '/things/:id/delete' do
          @thing = Thing.find(params[:id])
-        	if session[:user_id]
+         if session[:user_id]
            @thing = Thing.find(params[:id])
             if @thing.user_id == session[:user_id]
               @thing.delete
