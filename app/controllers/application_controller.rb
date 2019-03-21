@@ -10,7 +10,7 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "babythings_secret"
   end
 
-   get "/" do
+   get '/' do
    erb :index
    end
 
