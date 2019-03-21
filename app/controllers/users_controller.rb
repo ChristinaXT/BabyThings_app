@@ -10,8 +10,8 @@ class UsersController < ApplicationController
   end
   
   post '/signup' do
-    if params.values.any? {|value| value == ""}
-      erb :'users/create_user', locals: {message: "Please try again"}
+    if params.values.any? {|value| value == ''}
+      erb :'users/create_user', locals: {message: 'Please try again'}
     else
       @user = User.new(username: params[:username], email: params[:email], password: params[:password])
       @user.save
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 	  session[:user_id] = user.id 
 	     redirect '/things'
       else
-	     erb :'users/login', locals: {message: "Please try again"}
+	     erb :'users/login', locals: {message: 'Please try again'}
     end
   end
 
