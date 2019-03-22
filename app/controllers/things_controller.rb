@@ -1,4 +1,3 @@
-require 'pry'
 class ThingsController < ApplicationController
 
    get '/things' do
