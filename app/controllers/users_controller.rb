@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     if !logged_in?
 	erb :'users/create_user'
     else
-	redirect '/things'		
+	redirect "/things"		
     end
   end
   
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
       @user = User.new(username: params[:username], email: params[:email], password: params[:password])
       @user.save
       session[:user_id] = @user.id
-      redirect to '/things'
+      redirect to "/things"
     end
   end
   
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     if !logged_in?
       erb :'users/login'
     else
-      redirect to '/things'
+      redirect to "/things"
     end
   end
 
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     user = User.find_by(:username => params[:username])
       if user && user.authenticate(params[:password])
 	  session[:user_id] = user.id 
-	     redirect '/things'
+	     redirect "/things"
       else
 	     erb :'users/login', locals: {message: "Please try again"}
     end
@@ -41,9 +41,9 @@ class UsersController < ApplicationController
   get '/logout' do
     if session[:user_id] != nil
       session.destroy
-      redirect to '/'
+      redirect to "/"
     else
-      redirect to '/things'
+      redirect to "/things"
     end
   end
 
