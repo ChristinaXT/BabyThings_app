@@ -5,8 +5,8 @@
 
 <br>
    
-<button <a href="/things/<%= @thing.id %>/new">Add A New Baby Item</a></button>
-<button <a href="/things/<%= @thing.id %>/edit">Edit Baby Item</a></button>
+ <a href="/things/new"><button>Add A New Baby Item</button></a>
+ <a href="/things/ <%= @thing.id %> /edit"><button>Edit Baby Item</button></a>
 
 	  
  <form action="/things/<%=@thing.id %>/delete" method="post">
