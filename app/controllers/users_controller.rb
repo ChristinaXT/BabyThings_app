@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 	     session[:user_id] = user.id 
 	     redirect to "/things"
       else
-	     redirect to "users/login", 
+	     redirect to "users/login" 
       end
   end
 
