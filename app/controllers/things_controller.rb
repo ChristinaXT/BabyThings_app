@@ -5,23 +5,23 @@ class ThingsController < ApplicationController
         @things = Thing.all
         erb :'things/things'
       else
-        erb :'users/login', locals: {message: "You don't have access, please login"}
+        redirect to "users/login", {message: "You don't have access, please login"}
       end
     end
 
    get '/things/new' do
      if !logged_in?
-         erb :'users/login', locals: {message: "You don't have access, please login"}
+         redirect to "users/login"  {message: "You don't have access, please login"}
      end
          erb :'things/new'
    end
    
     post '/things' do
        if params.values.any? {|value| value == ""}
-         erb :'things/new', locals: {message: "Please try again"}
+         redirect to "things/new" {message: "Please try again"}
        else   
       	  @thing = Thing.create(content: params[:content], user_id: current_user.id)
-    	    redirect "/things/#{@thing.id}"
+    	    redirect to "/things/#{@thing.id}"
        end
     end
     
@@ -30,7 +30,7 @@ class ThingsController < ApplicationController
          @thing = Thing.find(params[:id])
       	   erb :'/things/show'
          else
-          erb :'users/login', locals: {message: "Please try again"}
+          redirect to "users/login", {message: "Please try again"}
         end
      end
 
@@ -40,10 +40,10 @@ class ThingsController < ApplicationController
     	     if @thing.user_id == session[:user_id]
     	      erb :'/things/edit'
    	     else
-              erb :'things/things', locals: {message: "You don't have access to edit list"}
+              redirect to "things/things", {message: "You don't have access to edit list"}
            end
          else
-             erb :'users/login', locals: {message: "Please login"}
+             redirect to "users/login", {message: "Please login"}
          end
       end
 

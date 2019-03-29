@@ -1,0 +1,15 @@
+<section class="intro-section">
+  <div class="container">
+  <h2>User <%= user.id %> List</h2>
+      <% @user.username.each do |user| %>
+	     <a href="/things/<%= thing.id %>">
+       <%= thing.content %> </a><br>
+       <% end %>
+   
+	  
+  <button> <a href="/things/new">Add New Baby Item</a></button>  
+	 
+  <p><a href="/logout"><button>Log Out</button></a></p>
+
+ </div>
+</section>
