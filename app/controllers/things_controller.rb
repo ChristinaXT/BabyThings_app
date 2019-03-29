@@ -11,14 +11,14 @@ class ThingsController < ApplicationController
 
    get '/things/new' do
      if !logged_in?
-         redirect to "users/login"  {message: "You don't have access, please login"}
+         redirect to "users/login"  
      end
          erb :'things/new'
    end
    
     post '/things' do
        if params.values.any? {|value| value == ""}
-         redirect to "things/new" {message: "Please try again"}
+         redirect to "things/new" 
        else   
       	  @thing = Thing.create(content: params[:content], user_id: current_user.id)
     	    redirect to "/things/#{@thing.id}"

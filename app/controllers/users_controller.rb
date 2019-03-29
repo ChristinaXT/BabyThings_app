@@ -5,13 +5,13 @@ class UsersController < ApplicationController
     if !logged_in?
 	erb :'users/create_user'
     else
-	redirect "/things"		
+	redirect to "/things"		
     end
   end
   
   post '/signup' do
     if params.values.any? {|value| value == ""}
-      erb :'users/create_user', {message: "Please try again"}
+      erb :'users/create_user'
     else
       @user = User.new(username: params[:username], email: params[:email], password: params[:password])
       @user.save
@@ -31,11 +31,11 @@ class UsersController < ApplicationController
   post '/login' do
     user = User.find_by(:username => params[:username])
       if user && user.authenticate(params[:password])
-	  session[:user_id] = user.id 
+	     session[:user_id] = user.id 
 	     redirect to "/things"
       else
-	     erb :'users/login', {message: "Please try again"}
-    end
+	     redirect to "users/login", 
+      end
   end
 
   get '/logout' do
@@ -51,9 +51,8 @@ class UsersController < ApplicationController
     if logged_in?
       @user = User.find(params[:id])
       	erb :'/users/show'
-   else
+    else
        redirect to "users/login", {message: "Please try again"}
-   end
- end
-
+    end
+  end
 end

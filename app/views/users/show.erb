@@ -1,13 +1,13 @@
 <section class="intro-section">
   <div class="container">
-  <h2>User <%= user.id %> List</h2>
-      <% @user.username.each do |user| %>
+  <h2>User <%= user.username %> List</h2>
+      <% @user.things.each do |thing| %>
 	     <a href="/things/<%= thing.id %>">
        <%= thing.content %> </a><br>
        <% end %>
    
 	  
-  <button> <a href="/things/new">Add New Baby Item</a></button>  
+  <p><a href="/things/new"><button>Add New Baby Item</a></button></p>  
 	 
   <p><a href="/logout"><button>Log Out</button></a></p>
 
