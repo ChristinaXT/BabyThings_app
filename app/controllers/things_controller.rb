@@ -29,7 +29,7 @@ class ThingsController < ApplicationController
     
       get '/things/:id' do
          if logged_in?
-         @thing = Thing.find(params[:id])
+         @thing = Thing.find_by_id(params[:id])
          @user = User.find(@thing.user_id)
       	   erb :'/things/show'
          else
@@ -39,7 +39,7 @@ class ThingsController < ApplicationController
 
       get '/things/:id/edit' do
 	       if logged_in?
-    	    @thing = Thing.find(params[:id])
+    	    @thing = Thing.find_by_id(params[:id])
     	     if @thing.user_id == session[:user_id]
     	      erb :'/things/edit'
    	     else
@@ -54,7 +54,7 @@ class ThingsController < ApplicationController
     	  if params.values.any? {|value| value == ""}
 	        redirect to "/things/#{params[:id]}/edit"
 	      else
-            @thing = Thing.find(params[:id])
+            @thing = Thing.find_by_id(params[:id])
       	    @thing.content = params[:content]
             @thing.save
             redirect to "/things/#{@thing.id}"
