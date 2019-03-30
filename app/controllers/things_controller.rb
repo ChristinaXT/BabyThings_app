@@ -20,7 +20,9 @@ class ThingsController < ApplicationController
        if params.values.any? {|value| value == ""}
          redirect to "things/new" 
        else   
-      	  @thing = Thing.create(content: params[:content], user_id: current_user.id)
+      	  @thing = Thing.create
+      	  @thing.user_id = user.id
+      	  @thing.save
     	    redirect to "/things/#{@thing.id}"
        end
     end
@@ -28,6 +30,7 @@ class ThingsController < ApplicationController
       get '/things/:id' do
          if logged_in?
          @thing = Thing.find(params[:id])
+         @user = User.find(@thing.user_id)
       	   erb :'/things/show'
          else
           redirect to "users/login", {message: "Please try again"}
@@ -66,10 +69,10 @@ class ThingsController < ApplicationController
             if @thing.user_id == session[:user_id]
               @thing.delete
               redirect to "/things"
-           else
+            else
               redirect to "/things"
-           end
-       else
+            end
+          else
           redirect to "/login"
       end
    end

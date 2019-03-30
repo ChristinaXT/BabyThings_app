@@ -1,13 +1,14 @@
 class UsersController < ApplicationController
 
 
-  get '/signup' do
-    if !logged_in?
-	erb :'users/create_user'
-    else
-	redirect to "/things"		
+   get "/signup" do
+      if !User.exists?(session[:user_id])
+        erb :'/users/create_user'
+      else
+        @user = current_user
+        redirect "/users/#{current_user.id}"
+     end
     end
-  end
   
   post '/signup' do
     if params.values.any? {|value| value == ""}
@@ -20,39 +21,36 @@ class UsersController < ApplicationController
     end
   end
   
+  get '/users/:id' do
+      @user = User.find(params[:id])
+      	erb :'/users/show'
+    end
+  end
+  
   get '/login' do
-    if !logged_in?
-      erb :'users/login'
+    if !User.exists?(session[:user_id])
+        erb :'/users/login'
     else
       redirect to "/things"
     end
   end
 
   post '/login' do
-    user = User.find_by(:username => params[:username])
-      if user && user.authenticate(params[:password])
-	     session[:user_id] = user.id 
-	     redirect to "/things"
+    @user = User.find_by(:username => params[:username])
+      if @user && @user.authenticate(params[:password])
+	     session[:user_id] = @user.id 
+	     redirect "/users/#{@user.id}"
       else
 	     redirect to "users/login" 
       end
   end
 
-  get '/logout' do
-    if session[:user_id] != nil
-      session.destroy
-      redirect to "/"
-    else
-      redirect to "/things"
-    end
+  get "/logout" do
+      if !User.exists?(session[:user_id])
+        redirect "/"
+      else
+        session.clear
+        redirect "/login"
+      end
   end
-
-  get '/users/:id' do
-    if logged_in?
-      @user = User.find(params[:id])
-      	erb :'/users/show'
-    else
-       redirect to "users/login", {message: "Please try again"}
-    end
-  end
-end
+  
