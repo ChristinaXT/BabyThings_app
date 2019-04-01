@@ -29,7 +29,7 @@ class ThingsController < ApplicationController
     
       get '/things/:id' do
          if logged_in?
-          @thing = Thing.find_by_id(params[:id]
+          @thing = Thing.find_by_id(params[:id])
       	   erb :'/things/show'
          else
           redirect to "users/login", {message: "Please try again"}
@@ -78,5 +78,5 @@ class ThingsController < ApplicationController
           redirect to "/login"
       end
    end
-
+ end
 end
