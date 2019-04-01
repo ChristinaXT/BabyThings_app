@@ -17,18 +17,19 @@ class ThingsController < ApplicationController
    end
    
     post '/things' do
-       if params.values.any? {|value| value == ""}
-         erb: "things/new" 
+      if logged_in?
+        if Thing.new(params[:thing]).valid?
+          @thing = current_user.things.build(params[:thing])
+          @thing.save
+          redirect to "/things"
        else   
-      	  @thing = Thing.create(content: params[:content], user_id: current_user.id)
-      	  @thing.save
-    	    redirect to "/things/#{@thing.id}"
+    	    redirect to "/things/new"
        end
     end
     
       get '/things/:id' do
          if logged_in?
-          @thing = Thing.find(params[:id]
+          @thing = Thing.find_by_id(params[:id]
       	   erb :'/things/show'
          else
           redirect to "users/login", {message: "Please try again"}
@@ -49,7 +50,9 @@ class ThingsController < ApplicationController
       end
 
        patch '/things/:id' do
-    	  if params[:thing][:content]==""
+        if logged_in?   
+          @thing = Thing.find_by_id(params[:id])
+    	   if params[:thing][:content]==""
 	        redirect to "/things/#{params[:id]}/edit"
 	      else
             @thing = Thing.find_by_id(params[:id])
