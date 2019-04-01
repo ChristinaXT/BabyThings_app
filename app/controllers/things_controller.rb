@@ -49,19 +49,20 @@ class ThingsController < ApplicationController
       end
 
        patch '/things/:id' do
-    	  if params.values.any? {|value| value == ""}
+    	  if params[:thing][:content]==""
 	        redirect to "/things/#{params[:id]}/edit"
 	      else
-            @thing = Thing.find(params[:id])
-      	    @thing.content = params[:content]
+            @thing = Thing.find_by_id(params[:id])
+      	    @thing.update(params[:thing])
             @thing.save
+          end
             redirect to "/things/#{@thing.id}"
           end
        end		  
 	
       # delete
        delete '/things/:id/delete' do
-         @thing = Thing.find(params[:id])
+         @thing = Thing.find_by_id(params[:id])
          if session[:user_id]
            @thing = Thing.find(params[:id])
             if @thing.user_id == session[:user_id]
