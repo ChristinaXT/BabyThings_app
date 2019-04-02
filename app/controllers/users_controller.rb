@@ -5,8 +5,7 @@ class UsersController < ApplicationController
        if !logged_in?
         erb :'/users/create_user'
       else
-        @user = current_user
-        redirect to "/users/#{@current_user.id}"
+        redirect to "/things"
      end
     end
   
