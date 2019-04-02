@@ -1,14 +1,16 @@
 class ThingsController < ApplicationController
 
-   get '/things/new' do
-     if logged_in
-       @user = current_user
-         erb :'/things/new'
-      else 
+ get '/things' do
+      if logged_in?
+        @user = current_user
+        @things = Thing.all
+        erb :'/things/things'
+      else
         redirect to "/login"
-   end
+    end
+end
   
-   post '/things' do
+    post '/things' do
      @user = current_user
         if params[:thing] == ""
           redirect to "/things/new"
@@ -19,19 +21,19 @@ class ThingsController < ApplicationController
           redirect to "/things/#{@thing.id}"
        end
     end
-    
-  
-   get '/things' do
-      if logged_in?
-        @user = current_user
-        @things = Thing.all
-        erb :'/things/things'
-      else
+ 
+ 
+   get '/things/new' do
+     if logged_in
+       @user = current_user
+         erb :'/things/new'
+      else 
         redirect to "/login"
-    end
-end
+   end
   
-   
+  
+    
+
       get '/things/:id' do
          if logged_in?
           @thing = Thing.find_by_id(params[:id])
