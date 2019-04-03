@@ -9,6 +9,7 @@
  <p><a href="/things/ <%= @thing.id %> /edit"><button>Edit Baby Item</button></a></p>
 
 
+
  <form action="/things/<%=@thing.id %>/delete" method="post">
    <input type="hidden" id="hidden" name="_method" value="delete">
    <input type="submit" value="delete item">

@@ -10,8 +10,11 @@ class UsersController < ApplicationController
     end
   
   post '/signup' do
+    binding.pry
     if params.values.any? {|value| value == ""}
       erb :'/users/create_user'
+    elsif User.username_taken?(params[:username])
+      redirect to "/signup"
     else
       @user = User.new(username: params[:username], email: params[:email], password: params[:password])
       @user.save
@@ -22,9 +25,10 @@ class UsersController < ApplicationController
   
   get '/users/:id' do
     if logged_in?
-      #session[:user_id] = @user.id
       @user = User.find(params[:id])
       	erb :'/users/show'
+    else 
+      redirect to "/login"
     end
   end
   
