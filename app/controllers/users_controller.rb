@@ -21,8 +21,11 @@ class UsersController < ApplicationController
   end
   
   get '/users/:id' do
+    if logged_in?
+      #session[:user_id] = @user.id
       @user = User.find(params[:id])
       	erb :'/users/show'
+    end
   end
   
   get '/login' do

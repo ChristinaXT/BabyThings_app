@@ -21,7 +21,7 @@ class ThingsController < ApplicationController
       if params.values.any? {|value| value == ""}
           erb :'/things/new'
         else  
-          user = User.find(session[:user_id])
+          #user = User.find(session[:user_id])
       	  @thing = Thing.create(content: params[:content])
       	  @thing = Thing.create(user_id: params[:user_id])
           redirect to "/things/#{@thing.id}"
