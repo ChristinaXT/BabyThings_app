@@ -10,7 +10,6 @@ class UsersController < ApplicationController
     end
   
   post '/signup' do
-    binding.pry
     if params.values.any? {|value| value == ""}
       erb :'/users/create_user'
     elsif User.username_taken?(params[:username])
