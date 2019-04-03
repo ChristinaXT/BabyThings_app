@@ -1,13 +1,13 @@
 class ThingsController < ApplicationController
 
  get '/things' do
-      if logged_in?
-        @things = Thing.all
-        erb :'/things/things'
-      else
-        redirect to "/login"
+    if logged_in?
+      @things = Thing.all
+      erb :'/things/things'
+    else
+      redirect to "/login"
     end
-end
+ end
   
   get '/things/new' do
      if logged_in?
@@ -16,13 +16,14 @@ end
       else 
         redirect to "/login"
    end
+ end
 
     post '/things' do
-     if params.values.any? {|value| value == ""}
+      if params.values.any? {|value| value == ""}
           erb :'/things/new'
-        else   
-         @thing = Thing.create(content: params[:content], user_id: current_user.id)
-          @thing.save
+        else  
+         @user = User.find(@thing.user_id)
+          @thing = Thing.create(content: params[:content], user_id: user.id)
           redirect to "/things/#{@thing.id}"
        end
     end
@@ -46,14 +47,15 @@ end
          end
       end
 
-       patch '/things/:id' do
+       patch '/things/:id' 
+       if params.values.any? {|value| value == ""}
           @thing = Thing.find(params[:id])
-    	   if params[:thing] ==""
 	        redirect to "/things/#{params[:id]}/edit"
 	      else
+	          @thing = Thing.find(params[:id])
       	    @thing.update(thing: params[:thing])
             @thing.save
-            redirect to "/things/#{params[:id]}"
+            redirect to "/things/#{@thing.id}"
           end
        end		  
 	
@@ -64,8 +66,9 @@ end
             if logged_in? && @thing.user_id == @user_id
               @thing.delete
             else
-          redirect to "/login"
-      end
-   end
- end
- end
+             redirect to "/login"
+            end
+       end
+
+end
+ 
