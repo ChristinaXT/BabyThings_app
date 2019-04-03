@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   end
   
   get '/login' do
-    if !User.exists?(session[:user_id])
+    if !logged_in?
         erb :'/users/login'
       else
         redirect to "/things"
@@ -44,13 +44,12 @@ class UsersController < ApplicationController
   end
 
    get '/logout' do
-     if !User.exists?(session[:user_id])
-        redirect "/"
-      else
-        session.clear
-        redirect to "/login"
-      end
+    if session[:user_id] != nil
+      session.destroy
+      redirect to "/"
+    else
+      redirect to "/things"
     end
+  end
 
-
- end 
+end
