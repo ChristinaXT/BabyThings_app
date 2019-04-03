@@ -37,7 +37,7 @@ class ThingsController < ApplicationController
         end
      end
 
-      post '/things/:id/edit' do
+      get '/things/:id/edit' do
     	    if logged_in?
     	    @thing = Thing.find(params[:id])
     	     if @thing.user_id == session[:user_id]
