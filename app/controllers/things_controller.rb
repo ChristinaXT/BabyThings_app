@@ -2,6 +2,7 @@ class ThingsController < ApplicationController
 
  get '/things' do
     if logged_in?
+      @user = current_user
       @things = Thing.all
       erb :'/things/things'
     else
@@ -11,6 +12,7 @@ class ThingsController < ApplicationController
   
   get '/things/new' do
      if logged_in?
+       @user = current_user
          erb :'/things/new'
       else 
         redirect to "/login"
@@ -18,12 +20,13 @@ class ThingsController < ApplicationController
  end
 
     post '/things' do
+      @user = current_user
       if params.values.any? {|value| value == ""}
-          erb :'/things/new'
+          redirect to "/things/new"
         else  
-          current_user
       	  @thing = Thing.create(content: params[:content])
-      	  @thing = Thing.create(user_id: params[:user_id])
+      	  @thing.user_id = @user.id
+      	  @thing.save
           redirect to "/things/#{@thing.id}"
        end
     end
@@ -52,15 +55,16 @@ class ThingsController < ApplicationController
 	         redirect to "/things/#{params[:id]}/edit"
 	        else
 	         if @thing.user_id = current_user.id
-      	    @thing.content = params[:content]
-            @thing.save
-            redirect to "/things/#{@thing.id}"
+      	     @thing.content = params[:content]
+             @thing.save
+              redirect to "/things/#{@thing.id}"
           end
        end		  
 	
       # delete
        delete '/things/:id/delete' do
          @thing = Thing.find(params[:id])
+         @user = current_user
             if @thing.user_id == session[:user_id]
               @thing.delete
            end
