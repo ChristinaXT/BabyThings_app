@@ -10,12 +10,12 @@ class UsersController < ApplicationController
     end
   
   post '/signup' do
+    @user = User.new(username: params[:username], email: params[:email], password: params[:password])
     if params.values.any? {|value| value == ""}
       erb :'/users/create_user'
-    elsif User.username_taken?(params[:username])
+    elsif User.username_check(@user.username)
       redirect to "/signup"
     else
-      @user = User.new(username: params[:username], email: params[:email], password: params[:password])
       @user.save
       session[:user_id] = @user.id
       redirect to "/users/#{@user.id}"
