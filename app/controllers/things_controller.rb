@@ -22,7 +22,7 @@ class ThingsController < ApplicationController
           redirect to "/things/new"
         else  
       	  @thing = Thing.create(content: params[:content])
-      	  @thing.user_id = @user.id
+      	  @thing.user_id = current_user.id
       	  @thing.save
           redirect to "/things/#{@thing.id}"
        end
@@ -30,7 +30,9 @@ class ThingsController < ApplicationController
  
       get '/things/:id' do
          if logged_in?
-          @thing = Thing.find(params[:id])
+           @thing = Thing.create(content: params[:content])
+      	   @thing.user_id = current_user.id
+          #@thing = current_user.things.find(params[:user_id])
       	   erb :'/things/show'
          else
           redirect to "/login"
