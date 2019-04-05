@@ -6,13 +6,13 @@
 <br>
 
  <p><a href="/things/new"><button>Add A New Baby Item</button></a></p>
- <p><a href="/things/ <%= @thing.id %> /edit"><button>Edit Baby Item</button></a></p>
+ <p><a href="/things/<%= @thing.id %> /edit"><button>Edit Baby Item</button></a></p>
 
 
 
- <form action="/things/<%=@thing.id %>/delete" method="post">
+ <form action="/things/<%= @thing.id %>/delete" method="POST">
    <input type="hidden" id="hidden" name="_method" value="delete">
-   <input type="submit" value="delete item">
+   <input type="submit" value="delete baby item">
  </form>
    
 
