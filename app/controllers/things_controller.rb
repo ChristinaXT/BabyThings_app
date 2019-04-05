@@ -21,7 +21,7 @@ class ThingsController < ApplicationController
       if params.values.any? {|value| value == ""}
           redirect to "/things/new"
         else  
-      	  @thing = Thing.create(params[:content])
+      	  @thing = Thing.create(content: params[:content])
       	  @thing.user_id = current_user.id
       	  @thing.save
           redirect to "/things/#{@thing.id}"

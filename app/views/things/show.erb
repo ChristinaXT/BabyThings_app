@@ -1,4 +1,4 @@
-<h1><%= @thing.content %></h1>
+<h3>Baby Item: <%= @thing[:content] %></h3>
 <section class="intro-section">
   <div class="container">
 
@@ -12,7 +12,7 @@
 
 
  <form action="/things/<%= @thing.id %>/delete" method="POST">
-   <input type="hidden" id="hidden" name="_method" value="delete">
+   <input type="hidden" id="hidden" name="_method" placeholder="<%= @thing.content %>" value="delete">
    <input type="submit" value="Delete baby item">
  </form>
    
