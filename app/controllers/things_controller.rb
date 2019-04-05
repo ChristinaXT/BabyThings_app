@@ -25,8 +25,6 @@ class ThingsController < ApplicationController
       	  @thing.user_id = current_user.id
       	  @thing.save
           redirect to "/things/#{@thing.id}"
-        else 
-          redirect to "/things/new"
        end
     end
  
