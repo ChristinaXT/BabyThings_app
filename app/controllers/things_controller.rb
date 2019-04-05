@@ -63,10 +63,10 @@ class ThingsController < ApplicationController
       # delete
        delete '/things/:id/delete' do
          @thing = Thing.find(params[:id])
-            if @thing.user_id == session[:user_id]
+            if @thing.user_id = current_user.id
               @thing.delete
-              erb :'/things/show'
-           end
+               erb :'/things/show'
+            end
              redirect to "/things"
         end
    end

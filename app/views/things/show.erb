@@ -1,21 +1,22 @@
+<h1><%= @thing.name %></h1>
 <section class="intro-section">
   <div class="container">
 
-<h3>Edit Your Baby Clothing and Accessory Items: </h3>
+
 
 <br>
 
  <p><a href="/things/new"><button>Add A New Baby Item</button></a></p>
- <p><a href="/things/<%= @thing.id %> /edit"><button>Edit Baby Item</button></a></p>
+ <p><a href="/things/<%= @thing.id %>/edit"><button>Edit Baby Item</button></a></p>
 
 
 
  <form action="/things/<%= @thing.id %>/delete" method="POST">
    <input type="hidden" id="hidden" name="_method" value="delete">
-   <input type="submit" value="delete baby item">
+   <input type="submit" value="Delete baby item">
  </form>
    
-
+ <p><a href="/users/<%= current_user.id %>"><button>Your List</button></a></p>
  <p><a href="/logout"><button>Log Out</button></a></p>
 
   </div>

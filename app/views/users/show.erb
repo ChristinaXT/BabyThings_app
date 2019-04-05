@@ -1,7 +1,7 @@
 <section class="intro-section">
   <div class="container">
   <h2> <%= @user.username %>'s Baby Things List</h2>
-      <% @user.things.each do |thing| %>
+      <% @things.each do |thing| %>
       
 	     <a href="/things/<%= thing.id %>">
        <%= thing.content %> </a><br>
