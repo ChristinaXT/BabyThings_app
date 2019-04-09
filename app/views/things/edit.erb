@@ -3,13 +3,13 @@
 <h3>Edit Your Baby Clothing and Accessory Items Here!</h3>
 
 
- 
+
 
 <form action="/things/<%= @thing.id %>" method="POST">
   <input id="hidden" type="hidden" name="_method" value="PATCH">
- <p>Edit Baby Item:<input type="text" name="content" placeholder="edit baby item" value="/edit/<%= @thing.content %>"></p>
+ <p>Edit Baby Item:<input type="text" name="content" placeholder="edit baby item" value=""<%= @thing.content %>"></p>
 
- <p><input type="submit" value="Edit Baby Item?" id="submit"></p> 
+ <p><input type="submit" value="Edit Baby Item?" id="submit"></p>
 </form>
 </div>
 </section>
