@@ -2,15 +2,12 @@
   <div class="container">
   <h2> <%= @user.username %>'s Baby Things List</h2>
       <% @things.each do |thing| %>
-      
 	     <a href="/things/<%= thing.id %>">
        <%= thing.content %> </a><br>
        <% end %>
    
 	  
   <p><a href="/things/new"><button>Add New Baby Item</button></a></p> 
-  
-  <p><a href="/things/things"><button>List of Baby Things</button></a></p>
   
   <p><a href="/users/<%= current_user.id %>"><button>Your List</button></a></p>
 	 
