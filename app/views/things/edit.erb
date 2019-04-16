@@ -7,7 +7,7 @@
 
 <form action="/things/<%= @thing.id %>" method="POST">
   <input id="hidden" type="hidden" name="_method" value="PATCH">
- <p>Edit Baby Item:<input type="text" name="content" placeholder="edit baby item" value=""<%= @thing.content %>"></p>
+ <p>Edit Baby Item:<input type="text" name="content" placeholder="edit baby item" value="<%= @thing.content %>"></p>
 
  <p><input type="submit" value="Edit Baby Item?" id="submit"></p>
 </form>

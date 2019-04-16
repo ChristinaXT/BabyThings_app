@@ -1,12 +1,9 @@
 class ThingsController < ApplicationController
 
   get '/things' do
-    if logged_in?
+     redirect_if_not_logged_in
       @things = Thing.all
       erb :'/things/things'
-    else
-      redirect to "/login"
-    end
   end
 
   get '/things/new' do

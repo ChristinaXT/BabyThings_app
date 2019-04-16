@@ -1,18 +1,18 @@
 <section class="intro-section">
    <div class="container">
   <h2> Collected List of Baby Clothing and Accessory Ideas</h2>
- 
+
       <% @things.each do |thing| %>
 	     <a href="/things/<%= thing.id %>">
-       <%= thing.content %> </a><br>
+       <%= thing.content %>
+       --<%= thing.user.username %></a><br>
        <% end %>
 
 
-  <p><a href="/things/new"><button> Add New Baby Item</button></a></p> 
+  <p><a href="/things/new"><button> Add New Baby Item</button></a></p>
   <p><a href="/users/<%= current_user.id %>"><button>Your List</button></a></p>
 
   <p><a href="/logout"><button>Log Out</button></a></p>
 
  </div>
 </section>
-
